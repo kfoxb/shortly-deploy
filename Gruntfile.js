@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         separator: ';',
       },
       dist: {
-        src: ['public/client/**/*.js', 'public/lib/**/*.js' ],
+        src: ['public/client/**/*.js' ],
         dest: 'public/min/built.js',
       },
     },
@@ -97,8 +97,9 @@ module.exports = function(grunt) {
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [
-  ]);
+  grunt.registerTask('build', function(kyle) {
+    grunt.task.run(['concat', 'uglify', 'cssmin'])
+  });
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {

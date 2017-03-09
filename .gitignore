@@ -3,10 +3,12 @@
 .LSOverride
 iisnode.yml
 npm-debug.log
+style.min.css
 
 db/shortly.sqlite
 node_modules
 public/dist
+public/min
 
 # Icon must ends with two \r.
 Icon

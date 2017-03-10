@@ -36,9 +36,7 @@ module.exports = function(grunt) {
     },
 
     eslint: {
-      target: [
-        // Add list of files to lint here
-      ]
+      target: ['app/**/*.js', 'db/**/*.js', 'lib/**/*.js', 'public/client/**/*.js']
     },
 
     cssmin: {
@@ -74,6 +72,24 @@ module.exports = function(grunt) {
       prodServer: {
       }
     },
+
+    githooks: {
+      all: {
+        options: {
+          template: 'path/to/a/template'
+        },
+        // Will bind the jshint and test:unit tasks
+        // with the template specified above
+        'pre-commit': 'jshint test:unit',
+
+        // Will bind the bower:install task
+        // with a specific template
+        'post-merge': {
+          taskNames: 'bower:install',
+          template: 'path/to/another/template'
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -98,7 +114,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', function(kyle) {
-    grunt.task.run(['concat', 'uglify', 'cssmin'])
+    grunt.task.run(['eslint','concat', 'uglify', 'cssmin', 'test']);
   });
 
   grunt.registerTask('upload', function(n) {
